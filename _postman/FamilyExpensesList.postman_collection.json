@@ -1,32 +1,13 @@
 {
 	"info": {
-		"_postman_id": "cce4231b-5feb-4087-b62c-7fe478442a18",
-		"name": "FamilyExpensesList__Try",
+		"_postman_id": "178d67f1-38fe-4645-8e88-5726604a5971",
+		"name": "FamilyExpensesList",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "backendservice",
 			"item": [
-				{
-					"name": "backendservice generateSecretKey",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/v1/backendservice/generateSecretKey",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"backendservice",
-								"generateSecretKey"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "backendservice createTableStruct",
 					"request": {
