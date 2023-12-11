@@ -23,11 +23,6 @@ class CategoryDataHandlerFactoryTest extends TestCase
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
-    public static function setUpBeforeClass(): void
-    {
-        fwrite(STDOUT, "\r\nTest STDOUT CategoryDataHandlerFactoryTest (for example, remove later)\r\n"); // TODO: remove later
-    }
-
     protected function setUp() : void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
