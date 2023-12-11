@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace AppTest\Handler;
+
+use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
+
+use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
+
+use App\Service\CategoryDataService;
+use App\Service\UtilitiesService;
+use App\Handler\CategoryDataHandler;
+use App\Handler\CategoryDataHandlerFactory;
+
+class CategoryDataHandlerFactoryTest extends TestCase
+{
+    use ProphecyTrait;
+
+    /** @var ContainerInterface|ObjectProphecy */
+    protected $container;
+
+    public static function setUpBeforeClass(): void
+    {
+        fwrite(STDOUT, "\r\nTest STDOUT CategoryDataHandlerFactoryTest (for example, remove later)\r\n"); // TODO: remove later
+    }
+
+    protected function setUp() : void
+    {
+        $this->container = $this->prophesize(ContainerInterface::class);
+        
+        $logger = $this->prophesize(LoggerInterface::class);
+        $categoryDataService = $this->prophesize(CategoryDataService::class);
+        $utilitiesService = $this->prophesize(UtilitiesService::class);
+
+        $this->container->get("config")->willReturn(array("config" => []));
+        $this->container->get(LoggerInterface::class)->willReturn($logger);
+        $this->container->get(CategoryDataService::class)->willReturn($categoryDataService);
+        $this->container->get(UtilitiesService::class)->willReturn($utilitiesService);
+    }
+
+    public function testFactoryInvoke() : void
+    {
+        $factory = new CategoryDataHandlerFactory();
+
+        $categoryDataHandler = $factory($this->container->reveal());
+
+        $this->assertInstanceOf(CategoryDataHandler::class, $categoryDataHandler);
+    }
+}
