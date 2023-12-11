@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "178d67f1-38fe-4645-8e88-5726604a5971",
+		"_postman_id": "871adaa4-c022-4364-9777-b9144f6a80dc",
 		"name": "FamilyExpensesList",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -146,7 +146,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/v1/backendservice/createUser?username=max1&password=1234&displayname=AA%20BB%20Max1",
+							"raw": "{{baseUrl}}/v1/backendservice/createUser?username=max1&password=1234&displayname=Max%20Muster",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -166,7 +166,7 @@
 								},
 								{
 									"key": "displayname",
-									"value": "AA%20BB%20Max1"
+									"value": "Max%20Muster"
 								}
 							]
 						}
@@ -179,7 +179,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/v1/backendservice/createUser?username=max2&password=1234;A&displayname=AA%20BB%20Max2",
+							"raw": "{{baseUrl}}/v1/backendservice/createUser?username=joe1&password=1234;A&displayname=Joe%20Public",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -191,7 +191,7 @@
 							"query": [
 								{
 									"key": "username",
-									"value": "max2"
+									"value": "joe1"
 								},
 								{
 									"key": "password",
@@ -199,7 +199,7 @@
 								},
 								{
 									"key": "displayname",
-									"value": "AA%20BB%20Max2"
+									"value": "Joe%20Public"
 								}
 							]
 						}
@@ -581,7 +581,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/v1/user/auth?username=max2&password=1234;A",
+							"raw": "{{baseUrl}}/v1/user/auth?username=joe1&password=1234;A",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -593,7 +593,7 @@
 							"query": [
 								{
 									"key": "username",
-									"value": "max2"
+									"value": "joe1"
 								},
 								{
 									"key": "password",
