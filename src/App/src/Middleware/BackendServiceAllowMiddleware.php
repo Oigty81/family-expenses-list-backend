@@ -37,6 +37,11 @@ class BackendServiceAllowMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {        
-        return $handler->handle($request);
+        if($this->config["backendServiceEnabled"] == true) {
+            return $handler->handle($request);
+        } else {
+            $this->logger->info("backend service functions are not allowed!");
+            return new JsonResponse(['err' => 'backend service functions are not allowed!'], 403);
+        }
     }
 }
