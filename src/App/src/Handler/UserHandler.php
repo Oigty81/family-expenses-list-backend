@@ -49,4 +49,38 @@ class UserHandler implements RequestHandlerInterface
         $this->userDataService = $userDataService;
         $this->utilitiesService = $utilitiesService;
     }
+    public function authAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $params = $this->getParameter($request);
+        
+        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'username');
+        if($check != null) {
+            return $check;
+        }
+
+        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'password');
+        if($check != null) {
+            return $check;
+        }
+
+        $longExpireTime = false;
+
+        if(array_key_exists('longExpireTime', $params)) {
+            $longExpireTime = true;
+        }
+        
+        $serviceResult = $this->userDataService->authFlow($params['username'], $params['password'], $longExpireTime);
+
+        if(array_key_exists('error', $serviceResult)) {
+            if($serviceResult["error"] == -1) {
+                return new JsonResponse($serviceResult["errorText"], 400);
+            } else if($serviceResult["error"] == -2) {
+                return new JsonResponse($serviceResult["errorText"], 400);
+            } else {
+                return new JsonResponse($serviceResult["errorText"], 500);
+            }
+        } else {
+            return new JsonResponse($serviceResult);
+        }  
+    }
 }
