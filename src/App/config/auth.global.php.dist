@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Global configuration for auth settings.
+ * for example: use global setting to deploy on a production server
+ *
+ * Copy this file to `auth.global.php` and change its settings as required.
+ * `auth.global.php` is ignored by git and safe to use for sensitive data like usernames and passwords.
+ */
+
+return [
+    "jwtSecretPrivateKeyFile" => "././_SSL/jwt_secret_private.pem",
+    "jwtSecretPublicKeyFile" => "././_SSL/jwt_secret_public.pem",
+];

@@ -1,0 +1,8 @@
+<?php
+
+return [
+    "serverName" => "your.domain.name",
+    "backendServiceEnabled" => false,
+    "shortExpireTimeAccessToken" => 1800,    // 30 minutes
+    "longExpireTimeAccessToken" => 864000,  // 10 days
+];
