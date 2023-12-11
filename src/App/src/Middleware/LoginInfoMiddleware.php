@@ -42,9 +42,40 @@ class LoginInfoMiddleware implements MiddlewareInterface
         $this->logger = $logger;
     }
 
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return $handler->handle($request);
+        $requestHeader = $request->getHeaders();
+        $token = null;
+        $username = "";
+        $userId = 0;
+
+        if(array_key_exists('authorization', $requestHeader)) {
+            $at = $requestHeader["authorization"][0];
+            $accessToken = str_replace("Bearer ","", $at);
+
+            try {
+                $publicKey = file_get_contents($this->config["jwtSecretPublicKeyFile"]);
+                $token = JWT::decode($accessToken, new Key($publicKey, 'RS256'));
+            } catch(ExpiredException $e) {
+                return new TextResponse("JWT is expired" , 401); 
+            } catch(Exception $e) {
+                return new TextResponse($e->getMessage() , 400); 
+            }
+
+            
+            if($token != null) {
+                $td = $token->data;
+                $username = $td->username;
+                $userId = $td->userId;
+            }
+
+            return $handler->handle($request
+                    ->withAttribute("username", $username)
+                    ->withAttribute("userId", $userId)
+                );
+
+        } else {
+            return new TextResponse("no or invalid access token!" , 403, ['WWW-Authenticate' => 'Bearer realm=""']); 
+        }
     }
 }
