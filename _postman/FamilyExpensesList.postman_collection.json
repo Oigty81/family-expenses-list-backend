@@ -1,0 +1,747 @@
+{
+	"info": {
+		"_postman_id": "cce4231b-5feb-4087-b62c-7fe478442a18",
+		"name": "FamilyExpensesList__Try",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "backendservice",
+			"item": [
+				{
+					"name": "backendservice generateSecretKey",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/generateSecretKey",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"generateSecretKey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice createTableStruct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/createTableStruct",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"createTableStruct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice deleteAllEntries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/deleteAllEntries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"deleteAllEntries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice deleteAllTables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/deleteAllTables",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"deleteAllTables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice createInitialContent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/createInitialContent?username=max1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"createInitialContent"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice deleteUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/deleteUser?username=max1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"deleteUser"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice deleteUser 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/deleteUser?username=max2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"deleteUser"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/createUser?username=max1&password=1234&displayname=AA%20BB%20Max1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"createUser"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max1"
+								},
+								{
+									"key": "password",
+									"value": "1234"
+								},
+								{
+									"key": "displayname",
+									"value": "AA%20BB%20Max1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "backendservice createUser2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/createUser?username=max2&password=1234;A&displayname=AA%20BB%20Max2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"createUser"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max2"
+								},
+								{
+									"key": "password",
+									"value": "1234;A"
+								},
+								{
+									"key": "displayname",
+									"value": "AA%20BB%20Max2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "category getCategories Without Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/category/getCategories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"category",
+								"getCategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category putCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/category/putCategory?title=AAAA",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"category",
+								"putCategory"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "AAAA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category putCategoryComposition",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryIds\": [1, 2, 3, 4, 7]\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/category/putCategoryComposition",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"category",
+								"putCategoryComposition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category getCategories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/category/getCategories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"category",
+								"getCategories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "expenses",
+			"item": [
+				{
+					"name": "expenses getExpensesPeriod",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/getExpensesPeriod?from=2023-09-22%2012%3A20&to=2023-09-24%2012%3A20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"getExpensesPeriod"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2023-09-22%2012%3A20"
+								},
+								{
+									"key": "to",
+									"value": "2023-09-24%2012%3A20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "expenses getExpensesPeriod 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/getExpensesPeriod?from=2023-10-22%2012%3A20&to=2023-11-24%2012%3A20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"getExpensesPeriod"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2023-10-22%2012%3A20"
+								},
+								{
+									"key": "to",
+									"value": "2023-11-24%2012%3A20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "expenses putExpenses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/putExpenses?categoryCompositionId=10&price=10.56&metatext=new%20entry",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"putExpenses"
+							],
+							"query": [
+								{
+									"key": "categoryCompositionId",
+									"value": "10"
+								},
+								{
+									"key": "price",
+									"value": "10.56"
+								},
+								{
+									"key": "metatext",
+									"value": "new%20entry"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "spending putExpenses 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/putExpenses?categoryCompositionId=10&price=10.55&metatext=new%20entry_2th",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"putExpenses"
+							],
+							"query": [
+								{
+									"key": "categoryCompositionId",
+									"value": "10"
+								},
+								{
+									"key": "price",
+									"value": "10.55"
+								},
+								{
+									"key": "metatext",
+									"value": "new%20entry_2th"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set access token\", function () {\r",
+									"    \r",
+									"    if(pm.response !== undefined && pm.response.json !== undefined && pm.response.json().token !== undefined) {\r",
+									"        let responseData = pm.response.json();\r",
+									"        console.log(\"..->\", responseData.token);\r",
+									"        pm.collectionVariables.set(\"accessToken\", responseData.token)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/user/auth?username=max1&password=1234",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max1"
+								},
+								{
+									"key": "password",
+									"value": "1234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user auth 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set access token\", function () {\r",
+									"    \r",
+									"    if(pm.response !== undefined && pm.response.json !== undefined && pm.response.json().token !== undefined) {\r",
+									"        let responseData = pm.response.json();\r",
+									"        console.log(\"..->\", responseData.token);\r",
+									"        pm.collectionVariables.set(\"accessToken\", responseData.token)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/user/auth?username=max2&password=1234;A",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max2"
+								},
+								{
+									"key": "password",
+									"value": "1234;A"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user auth with long expire time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set access token\", function () {\r",
+									"    \r",
+									"    if(pm.response !== undefined && pm.response.json !== undefined && pm.response.json().token !== undefined) {\r",
+									"        let responseData = pm.response.json();\r",
+									"        console.log(\"..->\", responseData.token);\r",
+									"        pm.collectionVariables.set(\"accessToken\", responseData.token)\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/user/auth?username=max1&password=1234&longExpireTime",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "max1"
+								},
+								{
+									"key": "password",
+									"value": "1234"
+								},
+								{
+									"key": "longExpireTime",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"if(environment.mode !== undefined) {",
+					"    switch(environment.mode) {",
+					"        case \"local\":",
+					"            pm.collectionVariables.set(\"baseUrl\", pm.collectionVariables.get(\"baseUrlLocal\"));",
+					"        break;",
+					"        case \"dev\":",
+					"            pm.collectionVariables.set(\"baseUrl\", pm.collectionVariables.get(\"baseUrlDev\"));",
+					"        break;",
+					"        case \"test\":",
+					"            pm.collectionVariables.set(\"baseUrl\", pm.collectionVariables.get(\"baseUrlTest\"));",
+					"        break;",
+					"        case \"prod\":",
+					"            pm.collectionVariables.set(\"baseUrl\", pm.collectionVariables.get(\"baseUrlProd\"));",
+					"        break;",
+					"    }",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8001/api",
+			"type": "default"
+		},
+		{
+			"key": "accessToken",
+			"value": "set it",
+			"type": "default"
+		},
+		{
+			"key": "baseUrlLocal",
+			"value": "http://localhost:8001/api",
+			"type": "default"
+		},
+		{
+			"key": "baseUrlDev",
+			"value": "http://localhost:8002/api",
+			"type": "default"
+		},
+		{
+			"key": "baseUrlTest",
+			"value": "http://localhost:8003/api",
+			"type": "default"
+		},
+		{
+			"key": "baseUrlProd",
+			"value": "http://localhost:8004/api",
+			"type": "default"
+		}
+	]
+}

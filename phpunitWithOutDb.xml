@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    beStrictAboutCoversAnnotation="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTodoAnnotatedTests="true"
+    bootstrap="vendor/autoload.php"
+    convertDeprecationsToExceptions="true"
+    executionOrder="depends,defects"
+    failOnRisky="true"
+    failOnWarning="true"
+    verbose="true"
+    colors="true">
+    <testsuites>
+        <testsuite name="default">
+            <directory>test</directory>
+            <exclude>test/AppTest/Service/BackendServiceServiceTest.php</exclude>
+            <exclude>test/AppTest/Service/SpendingDataServiceTest.php</exclude>
+            <exclude>test/AppTest/Service/CategoryDataServiceTest.php</exclude>
+            <exclude>test/AppTest/Service/UserDataServiceTest.php</exclude>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
+</phpunit>

@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * Local configuration for database adapter.
+ *
+ * Copy this file to `db.local.php` and change its settings as required.
+ * `db.local.php` is ignored by git and safe to use for local and sensitive data like usernames and passwords.
+ */
+
+return [
+    'db' => [
+        'adapters' => [
+            'mainDb' => [
+                "driver" => 'Pdo_Mysql',
+                'dsn' => 'mysql:dbname=db_xxx;host=localhost',
+                'username' => 'userxxx',
+                'password' => 'pwxxx',
+                'options' =>  [
+                    PDO::ATTR_PERSISTENT => true,
+                    PDO::ERRMODE_EXCEPTION => true
+                ]
+            ],
+            'mainDbUnitTest' => [
+                "driver" => 'Pdo_Mysql',
+                'dsn' => 'mysql:dbname=db_xxx_unittest;host=localhost',
+                'username' => 'userxxx',
+                'password' => 'pwxxx',
+                'options' =>  [
+                    PDO::ATTR_PERSISTENT => true,
+                    PDO::ERRMODE_EXCEPTION => true
+                ]
+            ],
+        ]
+    ]
+];

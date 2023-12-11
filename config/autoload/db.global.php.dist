@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Global configuration for database adapter.
+ * for example: use global setting to deploy on a production server
+ *
+ * Copy this file to `db.global.php` and change its settings as required.
+ * `db.global.php` is ignored by git and safe to use for sensitive data like usernames and passwords.
+ */
+
+return [
+    'db' => [
+        'adapters' => [
+            'mainDb' => [
+                "driver" => 'Pdo_Mysql',
+                'dsn' => 'mysql:dbname=db_xxx;host=localhost',
+                'username' => 'userxxx',
+                'password' => 'pwxxx',
+                'options' =>  [
+                    PDO::ATTR_PERSISTENT => true,
+                    PDO::ERRMODE_EXCEPTION => true
+                ]
+            ]
+        ]
+    ]
+];

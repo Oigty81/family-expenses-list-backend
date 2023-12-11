@@ -1,0 +1,10 @@
+/.phpcs-cache
+/.phpunit.result.cache
+/clover.xml
+/coveralls-upload.json
+/phpunit.xml
+/vendor/
+/_coverage-report
+composer.lock
+_SSL/jwt_secret_private.pem
+_SSL/jwt_secret_public.pem
