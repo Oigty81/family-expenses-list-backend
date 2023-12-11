@@ -1,0 +1,10 @@
+<?php
+
+return [
+    "preCategories" => [
+        0 => "Auto",
+        1 => "BMW",
+        2 => "Tanken",
+        3 => "HU"
+    ]
+];
