@@ -50,4 +50,43 @@ class CategoryDataHandler implements RequestHandlerInterface
         $this->categoryDataService = $categoryDataService;
         $this->utilitiesService = $utilitiesService;
     }
+
+    public function getCategoriesAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $serviceResult = $this->categoryDataService->getCategories();
+        $error = $this->utilitiesService->checkServiceErrorForResponse($serviceResult);
+        return $error == null ? new JsonResponse($serviceResult) : $error;
+    }
+
+    public function putCategoryAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $params = $this->getParameter($request);
+
+        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'title');
+        if($check != null) {
+            return $check;
+        }
+
+        $userId = $request->getAttribute("userId");
+
+        $serviceResult = $this->categoryDataService->storeCategory($userId, $params["title"]);
+        $error = $this->utilitiesService->checkServiceErrorForResponse($serviceResult);
+        return $error == null ? new JsonResponse($serviceResult) : $error;
+    }
+
+    public function putCategoryCompositionAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $params = $this->getParameter($request);
+
+        $check = $this->utilitiesService->checkWhetherParameterExistAndIsArray($params, 'categoryIds');
+        if($check != null) {
+            return $check;
+        }
+
+        $userId = $request->getAttribute("userId");
+
+        $serviceResult = $this->categoryDataService->storeCategoryComposition($userId, $params["categoryIds"]);
+        $error = $this->utilitiesService->checkServiceErrorForResponse($serviceResult);
+        return $error == null ? new JsonResponse($serviceResult) : $error;
+    }
 }
