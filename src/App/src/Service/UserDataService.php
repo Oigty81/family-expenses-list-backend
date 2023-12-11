@@ -10,8 +10,8 @@ use Laminas\Db\Adapter\Adapter;
 use Psr\Log\LoggerInterface;
 use Firebase\JWT\JWT;
 
-class UserDataService{
-
+class UserDataService
+{
     /**
      * @var array
      */
