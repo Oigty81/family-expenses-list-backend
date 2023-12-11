@@ -2,7 +2,6 @@
     "name": "try/mezzio",
     "description": "family-expenses-list-backend",
     "type": "project",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "mezzio",
