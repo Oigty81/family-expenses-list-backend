@@ -23,7 +23,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
         \Mezzio\Helper\BodyParams\BodyParamsMiddleware::class,
         App\Middleware\LoginInfoMiddleware::class,
         App\Handler\ExpensesDataHandler::class,
-    ],  ["GET", "POST"],'api.v1.spending');
+    ],  ["GET", "POST"],'api.v1.expenses');
 
     $app->route('/api/v1/backendservice/{action:\w+}', [
         \Mezzio\Helper\BodyParams\BodyParamsMiddleware::class,
