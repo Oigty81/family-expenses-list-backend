@@ -8,3 +8,5 @@
 composer.lock
 _SSL/jwt_secret_private.pem
 _SSL/jwt_secret_public.pem
+_SSL/jwt_secret_private__dev.pem
+_SSL/jwt_secret_public__dev.pem
