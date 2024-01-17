@@ -100,6 +100,10 @@
             "Composer\\Config::disableProcessTimeout",
             "php -S 0.0.0.0:8001 -t public/"
         ],
+        "serve-xdebug-off": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S 0.0.0.0:8001 -t public/ -d xdebug.mode=off"
+        ],
         "test": "phpunit --colors=always",
         "test-without-db": "phpunit --colors=always --configuration phpunitWithOutDb.xml",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",   
