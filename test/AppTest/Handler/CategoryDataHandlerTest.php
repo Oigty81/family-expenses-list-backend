@@ -6,7 +6,6 @@ namespace AppTest\Handler;
 
 use App\Handler\CategoryDataHandler;
 use App\Service\CategoryDataService;
-use App\Service\UtilitiesService;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -31,9 +30,6 @@ class CategoryDataHandlerTest extends TestCase
      /** @var CategoryDataService|ObjectProphecy */
      protected $categoryDataService;
 
-    /** @var UtilitiesService|ObjectProphecy */
-    protected $utilitiesService;
-
     /** @var ServerRequestInterface|ObjectProphecy */
     protected $serverRequest;
 
@@ -42,7 +38,6 @@ class CategoryDataHandlerTest extends TestCase
         $this->config = [];
         $this->loggerInterface  = $this->prophesize(LoggerInterface::class);
         $this->categoryDataService = $this->prophesize(CategoryDataService::class);
-        $this->utilitiesService = $this->prophesize(UtilitiesService::class);
         $this->serverRequest = $this->prophesize(ServerRequestInterface::class);
     }
 
@@ -55,7 +50,6 @@ class CategoryDataHandlerTest extends TestCase
             $this->config,
             $this->loggerInterface->reveal(),
             $this->categoryDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $result = $categoryDataHandler->getCategoriesAction($this->serverRequest->reveal());
@@ -66,17 +60,12 @@ class CategoryDataHandlerTest extends TestCase
 
     public function testThatHandlerMethodPutCategoryActionCallsItsServiceMethodsCorrectly(): void
     {     
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        ////$this->utilitiesService->checkWhetherParameterExistAndIsString(["title" => "test"], "title")->willReturn(null)->shouldBeCalledTimes(1);
-        $this->utilitiesService->checkServiceErrorForResponse(Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        
         $this->categoryDataService->storeCategory(1, "test")->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
         
         $categoryDataHandler = new CategoryDataHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->categoryDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["title" => "test"]);
@@ -91,16 +80,12 @@ class CategoryDataHandlerTest extends TestCase
 
     public function testThatHandlerMethodPutCategoryCompositionActionCallsItsServiceMethodsCorrectly(): void
     {
-        $this->utilitiesService->checkWhetherParameterExistAndIsArray(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        $this->utilitiesService->checkServiceErrorForResponse(Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        
         $this->categoryDataService->storeCategoryComposition(Argument::any(), Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $categoryDataHandler = new CategoryDataHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->categoryDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["categoryIds" => [1, 2]]);

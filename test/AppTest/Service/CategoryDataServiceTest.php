@@ -37,7 +37,7 @@ class CategoryDataServiceTest extends TestCase
     protected function tearDown() : void 
     {
         $dbCleaner = require "Test/AppTest/_helper/DbCleaner.php";
-        $dbCleaner($this->config, $this->dataBaseAdapter);
+        $dbCleaner($this->config, $this->dataBaseAdapter, $this->loggerInterface->reveal());
     }
 
     public function testWheterGetAllStoredCategoriesAndCategoryCompositions(): void
@@ -47,11 +47,11 @@ class CategoryDataServiceTest extends TestCase
         $backendServiceService->createUser("testuser", "unit1234test", "theTestUser");
 
         $userId = $this->dataBaseAdapter->query(
-            "SELECT id FROM ".$this->config["tableNames"]["users"]." WHERE userName = 'testuser';",
+            "SELECT id FROM users WHERE userName = 'testuser';",
             Adapter::QUERY_MODE_EXECUTE
         )->toArray()[0]["id"];
 
-        $this->dataBaseAdapter->query("INSERT INTO ".$this->config["tableNames"]["categories"]." (title, created, userId) VALUES (?, now(), ?);",
+        $this->dataBaseAdapter->query("INSERT INTO categories (title, created, userId) VALUES (?, now(), ?);",
             ["TestCategory1", $userId]
         );
 
@@ -61,7 +61,7 @@ class CategoryDataServiceTest extends TestCase
         )->toArray()[0]["LAST_INSERT_ID()"];
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO ".$this->config["tableNames"]["categories"]." (title, created, userId) VALUES (?, now(), ?);",
+            "INSERT INTO categories (title, created, userId) VALUES (?, now(), ?);",
             ["TestCategory2", $userId]
         );
 
@@ -72,7 +72,7 @@ class CategoryDataServiceTest extends TestCase
 
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO ".$this->config["tableNames"]["category_compositions"]." (created, userId) VALUES (now(), ?);",
+            "INSERT INTO category_compositions (created, userId) VALUES (now(), ?);",
             [$userId]
         );
         
@@ -82,7 +82,7 @@ class CategoryDataServiceTest extends TestCase
         )->toArray()[0]["LAST_INSERT_ID()"];
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO ".$this->config["tableNames"]["category_compositions"]." (created, userId) VALUES (now(), ?);",
+            "INSERT INTO category_compositions (created, userId) VALUES (now(), ?);",
             [$userId]
         );
         
@@ -92,17 +92,17 @@ class CategoryDataServiceTest extends TestCase
         )->toArray()[0]["LAST_INSERT_ID()"];
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO ".$this->config["tableNames"]["category_composition_members"]." (categoryId, categoryCompositionId ) VALUES (?, ?);",
+            "INSERT INTO category_composition_members (categoryId, categoryCompositionId ) VALUES (?, ?);",
             [$categoryId1, $categoryCompositionId1]
         );
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO ".$this->config["tableNames"]["category_composition_members"]." (categoryId, categoryCompositionId ) VALUES (?, ?);",
+            "INSERT INTO category_composition_members (categoryId, categoryCompositionId ) VALUES (?, ?);",
             [$categoryId1, $categoryCompositionId2]
         );
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO ".$this->config["tableNames"]["category_composition_members"]." (categoryId, categoryCompositionId ) VALUES (?, ?);",
+            "INSERT INTO category_composition_members (categoryId, categoryCompositionId ) VALUES (?, ?);",
             [$categoryId2, $categoryCompositionId2]
         );
 
@@ -148,7 +148,7 @@ class CategoryDataServiceTest extends TestCase
         $backendServiceService->createInitialContent("testuser");
 
         $userId = $this->dataBaseAdapter->query(
-            "SELECT id FROM ".$this->config["tableNames"]["users"]." WHERE userName = 'testuser';",
+            "SELECT id FROM users WHERE userName = 'testuser';",
             Adapter::QUERY_MODE_EXECUTE
         )->toArray()[0]["id"];
 
@@ -163,7 +163,7 @@ class CategoryDataServiceTest extends TestCase
         $this->assertEquals(true, $result);
         
         $categories = $this->dataBaseAdapter->query(
-            "SELECT id, title FROM ".$this->config["tableNames"]["categories"]." ORDER BY id;",
+            "SELECT id, title FROM categories ORDER BY id;",
             Adapter::QUERY_MODE_EXECUTE
         )->toArray();
 
@@ -193,7 +193,7 @@ class CategoryDataServiceTest extends TestCase
         $backendServiceService->createInitialContent("testuser");
 
         $userId = $this->dataBaseAdapter->query(
-            "SELECT id FROM ".$this->config["tableNames"]["users"]." WHERE userName = 'testuser';",
+            "SELECT id FROM users WHERE userName = 'testuser';",
             Adapter::QUERY_MODE_EXECUTE
         )->toArray()[0]["id"];
 
@@ -216,7 +216,7 @@ class CategoryDataServiceTest extends TestCase
         $backendServiceService->createInitialContent("testuser");
 
         $userId = $this->dataBaseAdapter->query(
-            "SELECT id FROM ".$this->config["tableNames"]["users"]." WHERE userName = 'testuser';",
+            "SELECT id FROM users WHERE userName = 'testuser';",
             Adapter::QUERY_MODE_EXECUTE
         )->toArray()[0]["id"];
 
@@ -228,7 +228,7 @@ class CategoryDataServiceTest extends TestCase
         $categoryDataService->storeCategory($userId, "TestCategory300");
 
         $categories = $this->dataBaseAdapter->query(
-            "SELECT id, title FROM ".$this->config["tableNames"]["categories"]." ORDER BY id;",
+            "SELECT id, title FROM categories ORDER BY id;",
             Adapter::QUERY_MODE_EXECUTE
         )->toArray();
 

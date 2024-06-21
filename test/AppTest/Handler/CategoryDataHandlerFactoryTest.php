@@ -12,7 +12,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Service\CategoryDataService;
-use App\Service\UtilitiesService;
 use App\Handler\CategoryDataHandler;
 use App\Handler\CategoryDataHandlerFactory;
 
@@ -29,12 +28,10 @@ class CategoryDataHandlerFactoryTest extends TestCase
         
         $logger = $this->prophesize(LoggerInterface::class);
         $categoryDataService = $this->prophesize(CategoryDataService::class);
-        $utilitiesService = $this->prophesize(UtilitiesService::class);
 
         $this->container->get("config")->willReturn(array("config" => []));
         $this->container->get(LoggerInterface::class)->willReturn($logger);
         $this->container->get(CategoryDataService::class)->willReturn($categoryDataService);
-        $this->container->get(UtilitiesService::class)->willReturn($utilitiesService);
     }
 
     public function testFactoryInvoke() : void
