@@ -19,7 +19,6 @@ return [
         \App\Service\UserDataService::class => \App\Service\UserDataServiceFactory::class,
         \App\Service\CategoryDataService::class => \App\Service\CategoryDataServiceFactory::class,
         \App\Service\ExpensesDataService::class => \App\Service\ExpensesDataServiceFactory::class,
-        \App\Service\UtilitiesService::class => \App\Service\UtilitiesServiceFactory::class,
         \App\Service\BackendServiceService::class => \App\Service\BackendServiceServiceFactory::class,
         
         // Middleware
