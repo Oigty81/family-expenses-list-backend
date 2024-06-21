@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "871adaa4-c022-4364-9777-b9144f6a80dc",
+		"_postman_id": "d6674df7-43e3-4197-b265-25a92af878ed",
 		"name": "FamilyExpensesList",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,7 @@
 			"name": "backendservice",
 			"item": [
 				{
-					"name": "backendservice createTableStruct",
+					"name": "createTableStruct",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -28,7 +28,7 @@
 					"response": []
 				},
 				{
-					"name": "backendservice deleteAllEntries",
+					"name": "deleteAllEntries",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -47,7 +47,7 @@
 					"response": []
 				},
 				{
-					"name": "backendservice deleteAllTables",
+					"name": "deleteAllTables",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -66,7 +66,7 @@
 					"response": []
 				},
 				{
-					"name": "backendservice createInitialContent",
+					"name": "createInitialContent",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -91,7 +91,7 @@
 					"response": []
 				},
 				{
-					"name": "backendservice deleteUser",
+					"name": "deleteUser",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -116,7 +116,7 @@
 					"response": []
 				},
 				{
-					"name": "backendservice deleteUser 2",
+					"name": "deleteUser 2",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -141,7 +141,7 @@
 					"response": []
 				},
 				{
-					"name": "backendservice createUser",
+					"name": "createUser",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -174,7 +174,7 @@
 					"response": []
 				},
 				{
-					"name": "backendservice createUser2",
+					"name": "createUser2",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -205,6 +205,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "phpInfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/phpInfo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"phpInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSqlTableQuery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/backendservice/getSqlTableQuerys",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"backendservice",
+								"getSqlTableQuerys"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -212,7 +250,7 @@
 			"name": "category",
 			"item": [
 				{
-					"name": "category getCategories Without Token",
+					"name": "getCategories Without Token",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -234,7 +272,7 @@
 					"response": []
 				},
 				{
-					"name": "category putCategory",
+					"name": "putCategory",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -269,7 +307,7 @@
 					"response": []
 				},
 				{
-					"name": "category putCategoryComposition",
+					"name": "putCategoryComposition",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -308,7 +346,7 @@
 					"response": []
 				},
 				{
-					"name": "category getCategories",
+					"name": "getCategories",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -342,7 +380,7 @@
 			"name": "expenses",
 			"item": [
 				{
-					"name": "expenses getExpensesPeriod",
+					"name": "getExpenses",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -354,34 +392,24 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/v1/expenses/getExpensesPeriod?from=2023-09-22%2012%3A20&to=2023-09-24%2012%3A20",
+							"raw": "{{baseUrl}}/v1/expenses/getExpenses",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"expenses",
-								"getExpensesPeriod"
-							],
-							"query": [
-								{
-									"key": "from",
-									"value": "2023-09-22%2012%3A20"
-								},
-								{
-									"key": "to",
-									"value": "2023-09-24%2012%3A20"
-								}
+								"getExpenses"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "expenses getExpensesPeriod 2",
+					"name": "getExpensesDateRageFilter",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -393,34 +421,147 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"daterangeFilter\" : {\r\n        \"from\":  \"2023-06-06\",\r\n        \"to\": \"2023-10-01\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/expenses/getExpensesPeriod?from=2023-10-22%2012%3A20&to=2023-11-24%2012%3A20",
+							"raw": "{{baseUrl}}/v1/expenses/getExpenses",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"expenses",
-								"getExpensesPeriod"
-							],
-							"query": [
-								{
-									"key": "from",
-									"value": "2023-10-22%2012%3A20"
-								},
-								{
-									"key": "to",
-									"value": "2023-11-24%2012%3A20"
-								}
+								"getExpenses"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "expenses putExpenses",
+					"name": "getExpensesMetaTextFilter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"metatextFilter\" :  \"M9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/getExpenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"getExpenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExpensesCategoriesFilter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoriesFilter\" :  [2, 4]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/getExpenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"getExpenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExpensesMultiFilter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoriesFilter\" :  [4, 6],\r\n    \"metatextFilter\" :  \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/getExpenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"getExpenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putExpenses",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -463,7 +604,7 @@
 					"response": []
 				},
 				{
-					"name": "spending putExpenses 2",
+					"name": "putExpenses 2",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -504,6 +645,117 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "deleteExpenses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/deleteExpenses?id=15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"deleteExpenses"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateExpenses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 5,\r\n    \"data\" : {\r\n        \"created\": \"2024-01-01: 18:06\",\r\n        \"price\": \"555\",\r\n        \"metatext\": \"blabla555\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/updateExpenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"updateExpenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateExpenses2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 5,\r\n    \"data\" : {\r\n        \"created\": \"2023-11-11: 17:08\",\r\n        \"price\": \"14.99\",\r\n        \"metatext\": \"mega\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/expenses/updateExpenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"expenses",
+								"updateExpenses"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -511,7 +763,7 @@
 			"name": "user",
 			"item": [
 				{
-					"name": "user auth",
+					"name": "auth",
 					"event": [
 						{
 							"listen": "test",
@@ -558,7 +810,7 @@
 					"response": []
 				},
 				{
-					"name": "user auth 2",
+					"name": "auth 2",
 					"event": [
 						{
 							"listen": "test",
@@ -605,7 +857,7 @@
 					"response": []
 				},
 				{
-					"name": "user auth with long expire time",
+					"name": "auth with long expire time",
 					"event": [
 						{
 							"listen": "test",
