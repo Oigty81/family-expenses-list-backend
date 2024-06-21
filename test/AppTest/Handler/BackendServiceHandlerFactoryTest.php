@@ -11,7 +11,6 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
-use App\Service\UtilitiesService;
 use App\Service\BackendServiceService;
 use App\Handler\BackendServiceHandler;
 use App\Handler\BackendServiceHandlerFactory;
@@ -29,12 +28,10 @@ class BackendServiceHandlerFactoryTest extends TestCase
         
         $logger = $this->prophesize(LoggerInterface::class);
         $backendServiceService = $this->prophesize(BackendServiceService::class);
-        $utilitiesService = $this->prophesize(UtilitiesService::class);
 
         $this->container->get("config")->willReturn(array("config" => []));
         $this->container->get(LoggerInterface::class)->willReturn($logger);
         $this->container->get(BackendServiceService::class)->willReturn($backendServiceService);
-        $this->container->get(UtilitiesService::class)->willReturn($utilitiesService);
     }
 
     public function testFactoryInvoke() : void

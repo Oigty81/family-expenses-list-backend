@@ -6,7 +6,6 @@ namespace AppTest\Handler;
 
 use App\Handler\BackendServiceHandler;
 use App\Service\BackendServiceService;
-use App\Service\UtilitiesService;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -30,9 +29,6 @@ class BackendServiceHandlerTest extends TestCase
      /** @var BackendServiceService|ObjectProphecy */
      protected $backendServiceService;
 
-    /** @var UtilitiesService|ObjectProphecy */
-    protected $utilitiesService;
-
     /** @var ServerRequestInterface|ObjectProphecy */
     protected $serverRequest;
 
@@ -41,7 +37,6 @@ class BackendServiceHandlerTest extends TestCase
         $this->config = [];
         $this->loggerInterface  = $this->prophesize(LoggerInterface::class);
         $this->backendServiceService = $this->prophesize(BackendServiceService::class);
-        $this->utilitiesService = $this->prophesize(UtilitiesService::class);
         $this->serverRequest = $this->prophesize(ServerRequestInterface::class);
     }
     
@@ -53,7 +48,6 @@ class BackendServiceHandlerTest extends TestCase
             $this->config,
             $this->loggerInterface->reveal(),
             $this->backendServiceService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn([]);
@@ -66,16 +60,13 @@ class BackendServiceHandlerTest extends TestCase
     }
 
     public function testThatHandlerMethodCreateInitialContentActionCallsItsServiceMethodsCorrectly(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        
+    {        
         $this->backendServiceService->createInitialContent(Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $backendServiceHandler = new BackendServiceHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->backendServiceService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testuser"]);
@@ -95,7 +86,6 @@ class BackendServiceHandlerTest extends TestCase
             $this->config,
             $this->loggerInterface->reveal(),
             $this->backendServiceService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn([]);
@@ -115,7 +105,6 @@ class BackendServiceHandlerTest extends TestCase
             $this->config,
             $this->loggerInterface->reveal(),
             $this->backendServiceService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn([]);
@@ -128,16 +117,13 @@ class BackendServiceHandlerTest extends TestCase
     }
 
     public function testThatHandlerMethodCreateUserActionCallsItsServiceMethodsCorrectly(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(3);
-        
+    {        
         $this->backendServiceService->createUser(Argument::any(), Argument::any(), Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $backendServiceHandler = new BackendServiceHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->backendServiceService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testuser", "password" => "pw123", "displayname" => "testUser"]);
@@ -151,15 +137,13 @@ class BackendServiceHandlerTest extends TestCase
 
     public function testThatHandlerMethodDeleteUserActionCallsItsServiceMethodsCorrectly(): void
     {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        
+                
         $this->backendServiceService->deleteUser(Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $backendServiceHandler = new BackendServiceHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->backendServiceService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testuser"]);
