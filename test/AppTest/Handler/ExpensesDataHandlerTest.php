@@ -6,7 +6,7 @@ namespace AppTest\Handler;
 
 use App\Handler\ExpensesDataHandler;
 use App\Service\ExpensesDataService;
-use App\Service\UtilitiesService;
+
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -30,9 +30,6 @@ class ExpensesDataHandlerTest extends TestCase
      /** @var ExpensesDataService|ObjectProphecy */
      protected $expensesDataService;
 
-    /** @var UtilitiesService|ObjectProphecy */
-    protected $utilitiesService;
-
     /** @var ServerRequestInterface|ObjectProphecy */
     protected $serverRequest;
 
@@ -41,47 +38,36 @@ class ExpensesDataHandlerTest extends TestCase
         $this->config = [];
         $this->loggerInterface  = $this->prophesize(LoggerInterface::class);
         $this->expensesDataService = $this->prophesize(ExpensesDataService::class);
-        $this->utilitiesService = $this->prophesize(UtilitiesService::class);
         $this->serverRequest = $this->prophesize(ServerRequestInterface::class);
     }
 
-    public function testThatHandlerMethodGetExpensesPeriodActionCallsItsServiceMethodsCorrectly(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(2);
-        $this->utilitiesService->checkServiceErrorForResponse(Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        
-        $this->expensesDataService->fetchExpensesPeriod(Argument::any(), Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
+    public function testThatHandlerMethodGetExpensesActionCallsItsServiceMethodsCorrectly(): void
+    {        
+        $this->expensesDataService->getExpenses(Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $expensesDataHandler = new ExpensesDataHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->expensesDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
-        $this->serverRequest->getQueryParams()->willReturn(["from" => "1", "to" => "2"]);
+        $this->serverRequest->getQueryParams()->willReturn([]);
         $this->serverRequest->getParsedBody()->willReturn([]);
-        $this->serverRequest->getAttribute("userId")->willReturn(1);
-
-        $result = $expensesDataHandler->getExpensesPeriodAction($this->serverRequest->reveal());
+        
+        $result = $expensesDataHandler->getExpensesAction($this->serverRequest->reveal());
 
         $this->assertEquals(200, $result->getStatusCode());
         $this->assertEquals("{\"TestCall\":1}", $result->getBody()->getContents());
     }
 
     public function testThatHandlerMethodPutExpensesActionCallsItsServiceMethodsCorrectly(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        $this->utilitiesService->checkWhetherParameterExistAndIsNumeric(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(2);
-        $this->utilitiesService->checkServiceErrorForResponse(Argument::any())->willReturn(null)->shouldBeCalledTimes(1);
-        
+    {        
         $this->expensesDataService->insertExpenses(Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $expensesDataHandler = new ExpensesDataHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->expensesDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["categoryCompositionId" => 1, "price" => 2, "metatext" => "meta..."]);
@@ -89,6 +75,45 @@ class ExpensesDataHandlerTest extends TestCase
         $this->serverRequest->getAttribute("userId")->willReturn(1);
 
         $result = $expensesDataHandler->putExpensesAction($this->serverRequest->reveal());
+
+        $this->assertEquals(200, $result->getStatusCode());
+        $this->assertEquals("{\"TestCall\":1}", $result->getBody()->getContents());
+    }
+
+    public function testThatHandlerMethodUpdateExpensesActionCallsItsServiceMethodsCorrectly(): void
+    {        
+        $this->expensesDataService->updateExpenses(999, Argument::any(), Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
+
+        $expensesDataHandler = new ExpensesDataHandler(
+            $this->config,
+            $this->loggerInterface->reveal(),
+            $this->expensesDataService->reveal(),
+        );
+
+        $this->serverRequest->getQueryParams()->willReturn(["id" => "1", "data" => "anydata"]);
+        $this->serverRequest->getParsedBody()->willReturn([]);
+        $this->serverRequest->getAttribute("userId")->willReturn(999);
+
+        $result = $expensesDataHandler->updateExpensesAction($this->serverRequest->reveal());
+
+        $this->assertEquals(200, $result->getStatusCode());
+        $this->assertEquals("{\"TestCall\":1}", $result->getBody()->getContents());
+    }
+
+    public function testThatHandlerMethodDeleteExpensesActionCallsItsServiceMethodsCorrectly(): void
+    {        
+        $this->expensesDataService->deleteExpenses(Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
+
+        $expensesDataHandler = new ExpensesDataHandler(
+            $this->config,
+            $this->loggerInterface->reveal(),
+            $this->expensesDataService->reveal(),
+        );
+
+        $this->serverRequest->getQueryParams()->willReturn(["id" => "1"]);
+        $this->serverRequest->getParsedBody()->willReturn([]);
+    
+        $result = $expensesDataHandler->deleteExpensesAction($this->serverRequest->reveal());
 
         $this->assertEquals(200, $result->getStatusCode());
         $this->assertEquals("{\"TestCall\":1}", $result->getBody()->getContents());

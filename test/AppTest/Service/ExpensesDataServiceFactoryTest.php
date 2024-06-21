@@ -15,7 +15,7 @@ use App\Service\CategoryDataService;
 use App\Service\ExpensesDataService;
 use App\Service\ExpensesDataServiceFactory;
 
-class SpendingDataServiceFactoryTest extends TestCase
+class ExpensesDataServiceFactoryTest extends TestCase
 {
     use ProphecyTrait;
 

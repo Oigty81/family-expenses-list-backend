@@ -12,7 +12,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Service\ExpensesDataService;
-use App\Service\UtilitiesService;
 use App\Handler\ExpensesDataHandler;
 use App\Handler\ExpensesDataHandlerFactory;
 
@@ -29,12 +28,10 @@ class ExpensesDataHandlerFactoryTest extends TestCase
         
         $logger = $this->prophesize(LoggerInterface::class);
         $expensesDataService = $this->prophesize(ExpensesDataService::class);
-        $utilitiesService = $this->prophesize(UtilitiesService::class);
-
+        
         $this->container->get("config")->willReturn(array("config" => []));
         $this->container->get(LoggerInterface::class)->willReturn($logger);
         $this->container->get(ExpensesDataService::class)->willReturn($expensesDataService);
-        $this->container->get(UtilitiesService::class)->willReturn($utilitiesService);
     }
 
     public function testFactoryInvoke() : void

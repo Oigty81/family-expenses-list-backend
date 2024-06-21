@@ -6,7 +6,6 @@ namespace App\Handler;
 
 use Psr\Log\LoggerInterface;
 use App\Service\ExpensesDataService;
-use App\Service\UtilitiesService;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -19,7 +18,6 @@ class ExpensesDataHandlerFactory
             $container->get("config")["config"],
             $container->get(LoggerInterface::class),
             $container->get(ExpensesDataService::class),
-            $container->get(UtilitiesService::class)
         );
     }
 }
