@@ -76,7 +76,7 @@ composer run test-without-db
 ./selected_unittests.bat
 ```
 
-### Deployment
+### Deployment (Apache example)
 Use
 ```
 composer run deploy:x
@@ -90,5 +90,10 @@ Its destination should be a sub-folder named `/api` in the frontend-bundle.
 ![](./docs/backend_root.png)
 
 The `.htaccess` file from the frontend-project rules all routes which starts with `/api/*` to this backend
+
+###
+
+## Database model
+![alt text](/db-model.png)
 
 # 
