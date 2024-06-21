@@ -40,7 +40,7 @@ class UserDataServiceTest extends TestCase
     protected function tearDown() : void 
     {
         $dbCleaner = require "Test/AppTest/_helper/DbCleaner.php";
-        $dbCleaner($this->config, $this->dataBaseAdapter);
+        $dbCleaner($this->config, $this->dataBaseAdapter, $this->loggerInterface->reveal());
     }
 
     public function testAuthFlowWhenUserIsNotExist(): void
@@ -54,7 +54,7 @@ class UserDataServiceTest extends TestCase
         $result = $userDataService->authFlow("unknownuser", "123", false);
 
         $this->assertEquals(-1, $result["error"]);
-        $this->assertEquals("user: unknownuser not found!", $result["errorText"]);
+        $this->assertEquals("user: unknownuser not found!", $result["errormsg"]);
     }
 
     public function testAuthFlowWhenUserPasswordIsWrong(): void
@@ -68,7 +68,7 @@ class UserDataServiceTest extends TestCase
         $result = $userDataService->authFlow("testuser", "123", false);
         
         $this->assertEquals(-2, $result["error"]);
-        $this->assertEquals("wrong password!", $result["errorText"]);
+        $this->assertEquals("wrong password!", $result["errormsg"]);
     }
 
     public function testAuthFlowWhenUserAuthenticationWasSuccessful(): void
@@ -125,6 +125,6 @@ class UserDataServiceTest extends TestCase
         $result = $userDataService->authFlow("testuser", "unit1234test", false);
 
         $this->assertEquals(-99, $result["error"]);
-        $this->assertEquals("error in user__authFlow.. Unit Test Exception Test", $result["errorText"]);
+        $this->assertEquals("error in user__authFlow.. Unit Test Exception Test", $result["errormsg"]);
     }
 }

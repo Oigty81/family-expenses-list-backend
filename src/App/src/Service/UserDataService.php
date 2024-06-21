@@ -38,11 +38,15 @@ class UserDataService
 
     public function authFlow($username, $password, $longExpireTime)
     {
+        $userQuery = <<<SQLQUERY
+        SELECT id, password, displayname FROM users WHERE username = ?;
+        SQLQUERY;
+
         try {
-            $userResult = $this->db->query("SELECT id, password, displayname FROM ".$this->config["tableNames"]["users"]." WHERE username = ?;", [ $username ])->toArray();
+            $userResult = $this->db->query($userQuery, [ $username ])->toArray();
 
             if(count($userResult) != 1) {
-                return [ "error" => -1, "errorText" => "user: ".$username." not found!" ];
+                return [ "error" => -1, "errormsg" => "user: ".$username." not found!" ];
             }
 
             $passwordHash = $userResult[0]["password"];
@@ -77,16 +81,16 @@ class UserDataService
 
                 $accessToken = JWT::encode($payload, $privateKey, 'RS256');
 
-                $this->db->query("UPDATE ".$this->config["tableNames"]["users"]." SET lastLogin = now() WHERE id = ?;", [ $userResult[0]["id"] ]);
+                $this->db->query("UPDATE users SET lastLogin = now() WHERE id = ?;", [ $userResult[0]["id"] ]);
 
             } else {
-                return [ "error" => -2, "errorText" => "wrong password!" ];
+                return [ "error" => -2, "errormsg" => "wrong password!" ];
             }
             
             return [ "token" => $accessToken];
 
         } catch (Throwable $e) {
-            return [ "error" => -99, "errorText" => "error in user__authFlow.. ".$e->getMessage() ];
+            return [ "error" => -99, "errormsg" => "error in user__authFlow.. ".$e->getMessage() ];
         }     
     }
 }

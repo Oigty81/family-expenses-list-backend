@@ -6,7 +6,6 @@ namespace AppTest\Handler;
 
 use App\Handler\UserHandler;
 use App\Service\UserDataService;
-use App\Service\UtilitiesService;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -29,9 +28,6 @@ class UserHandlerTest extends TestCase
      /** @var UserDataService|ObjectProphecy */
      protected $userDataService;
 
-    /** @var UtilitiesService|ObjectProphecy */
-    protected $utilitiesService;
-
     /** @var ServerRequestInterface|ObjectProphecy */
     protected $serverRequest;
 
@@ -40,21 +36,17 @@ class UserHandlerTest extends TestCase
         $this->config = [];
         $this->loggerInterface  = $this->prophesize(LoggerInterface::class);
         $this->userDataService = $this->prophesize(UserDataService::class);
-        $this->utilitiesService = $this->prophesize(UtilitiesService::class);
         $this->serverRequest = $this->prophesize(ServerRequestInterface::class);
     }
 
     public function testThatHandlerMethodGetSpendingsPeriodActionCallsItsServiceMethodsCorrectlyWithoutLongExpireTime(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(2);
-        
+    {        
         $this->userDataService->authFlow(Argument::any(), Argument::any(), false)->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $userHandler = new UserHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->userDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testu", "password" => "testpw"]);
@@ -67,16 +59,13 @@ class UserHandlerTest extends TestCase
     }
 
     public function testThatHandlerMethodAuthActionCallsItsServiceMethodsCorrectlyWithLongExpireTime(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(2);
-        
+    {        
         $this->userDataService->authFlow(Argument::any(), Argument::any(), true)->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $userHandler = new UserHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->userDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testu", "password" => "testpw", "longExpireTime" => "dummy"]);
@@ -89,16 +78,13 @@ class UserHandlerTest extends TestCase
     }
 
     public function testThatHandlerMethodAuthActionCallsItsServiceMethodsCorrectlyWhenServiceReturnsErrorFor400_1(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(2);
-        
-        $this->userDataService->authFlow(Argument::any(), Argument::any(), true)->willReturn(["TestCall" => 1, "error" => -1, "errorText" => "error test for -1"])->shouldBeCalledTimes(1);
+    {        
+        $this->userDataService->authFlow(Argument::any(), Argument::any(), true)->willReturn(["TestCall" => 1, "error" => -1, "errormsg" => "error test for -1"])->shouldBeCalledTimes(1);
 
         $userHandler = new UserHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->userDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testu", "password" => "testpw", "longExpireTime" => "dummy"]);
@@ -111,16 +97,13 @@ class UserHandlerTest extends TestCase
     }
 
     public function testThatHandlerMethodAuthActionCallsItsServiceMethodsCorrectlyWhenServiceReturnsErrorFor400_2(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(2);
-        
-        $this->userDataService->authFlow(Argument::any(), Argument::any(), true)->willReturn(["TestCall" => 1, "error" => -2, "errorText" => "error test for -2"])->shouldBeCalledTimes(1);
+    {        
+        $this->userDataService->authFlow(Argument::any(), Argument::any(), true)->willReturn(["TestCall" => 1, "error" => -2, "errormsg" => "error test for -2"])->shouldBeCalledTimes(1);
 
         $userHandler = new UserHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->userDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testu", "password" => "testpw", "longExpireTime" => "dummy"]);
@@ -133,16 +116,13 @@ class UserHandlerTest extends TestCase
     }
 
     public function testThatHandlerMethodAuthActionCallsItsServiceMethodsCorrectlyWhenServiceReturnsErrorFor500(): void
-    {
-        $this->utilitiesService->checkWhetherParameterExistAndIsString(Argument::any(), Argument::any())->willReturn(null)->shouldBeCalledTimes(2);
-        
-        $this->userDataService->authFlow(Argument::any(), Argument::any(), true)->willReturn(["TestCall" => 1, "error" => -99, "errorText" => "error test for any"])->shouldBeCalledTimes(1);
+    {        
+        $this->userDataService->authFlow(Argument::any(), Argument::any(), true)->willReturn(["TestCall" => 1, "error" => -99, "errormsg" => "error test for any"])->shouldBeCalledTimes(1);
 
         $userHandler = new UserHandler(
             $this->config,
             $this->loggerInterface->reveal(),
             $this->userDataService->reveal(),
-            $this->utilitiesService->reveal()
         );
 
         $this->serverRequest->getQueryParams()->willReturn(["username" => "testu", "password" => "testpw", "longExpireTime" => "dummy"]);

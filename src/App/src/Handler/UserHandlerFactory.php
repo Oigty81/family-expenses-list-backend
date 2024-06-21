@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Service\UserDataService;
-use App\Service\UtilitiesService;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -19,7 +18,6 @@ class UserHandlerFactory
             $container->get("config")["config"],
             $container->get(LoggerInterface::class),
             $container->get(UserDataService::class),
-            $container->get(UtilitiesService::class)
         );
     }
 }

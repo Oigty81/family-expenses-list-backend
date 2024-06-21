@@ -12,7 +12,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Service\UserDataService;
-use App\Service\UtilitiesService;
 use App\Handler\UserHandler;
 use App\Handler\UserHandlerFactory;
 
@@ -29,12 +28,10 @@ class UserHandlerFactoryTest extends TestCase
         
         $logger = $this->prophesize(LoggerInterface::class);
         $userDataService = $this->prophesize(userDataService::class);
-        $utilitiesService = $this->prophesize(UtilitiesService::class);
-
+        
         $this->container->get("config")->willReturn(array("config" => []));
         $this->container->get(LoggerInterface::class)->willReturn($logger);
         $this->container->get(UserDataService::class)->willReturn($userDataService);
-        $this->container->get(UtilitiesService::class)->willReturn($utilitiesService);
     }
 
     public function testFactoryInvoke() : void
