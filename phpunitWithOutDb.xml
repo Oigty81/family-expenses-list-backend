@@ -16,7 +16,7 @@
         <testsuite name="default">
             <directory>test</directory>
             <exclude>test/AppTest/Service/BackendServiceServiceTest.php</exclude>
-            <exclude>test/AppTest/Service/SpendingDataServiceTest.php</exclude>
+            <exclude>test/AppTest/Service/ExpensesDataServiceTest.php</exclude>
             <exclude>test/AppTest/Service/CategoryDataServiceTest.php</exclude>
             <exclude>test/AppTest/Service/UserDataServiceTest.php</exclude>
         </testsuite>

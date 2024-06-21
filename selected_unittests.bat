@@ -14,7 +14,6 @@
 :: call composer run test test/AppTest/Service/CategoryDataServiceFactoryTest.php
 :: call composer run test test/AppTest/Service/ExpensesDataServiceFactoryTest.php
 :: call composer run test test/AppTest/Service/UserDataServiceFactoryTest.php
-:: call composer run test test/AppTest/Service/UtilitiesServiceFactoryTest.php
 :: call composer run test test/AppTest/Service/LoggerFactoryTest.php
 
 :: ----------------------------------------------------------
@@ -38,4 +37,3 @@
 :: call composer run test test/AppTest/Service/CategoryDataServiceTest.php
 :: call composer run test test/AppTest/Service/ExpensesDataServiceTest.php
 :: call composer run test test/AppTest/Service/UserDataServiceTest.php
-:: call composer run test test/AppTest/Service/UtilitiesServiceTest.php
