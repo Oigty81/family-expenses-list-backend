@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Service\BackendServiceService;
-use App\Service\UtilitiesService;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -19,7 +18,6 @@ class BackendServiceHandlerFactory
             $container->get("config")["config"],
             $container->get(LoggerInterface::class),
             $container->get(BackendServiceService::class),
-            $container->get(UtilitiesService::class)
         );
     }
 }

@@ -32,22 +32,26 @@ class BackendServiceHandler implements RequestHandlerInterface
      */
     private $backendServiceService;
 
-    /**
-     * @var UtilitiesService
-     */
-    private $utilitiesService;
-
     public function __construct(
         array $config,
         LoggerInterface $logger,
         BackendServiceService $backendServiceService,
-        UtilitiesService $utilitiesService
     )
     {
         $this->config = $config;
         $this->logger = $logger;
         $this->backendServiceService = $backendServiceService;
-        $this->utilitiesService = $utilitiesService;
+    }
+
+    public function phpInfoAction(ServerRequestInterface $request): ResponseInterface
+    {
+        phpinfo();
+        die();
+    }
+
+    public function getSqlTableQueryAction(ServerRequestInterface $request): ResponseInterface
+    {
+        return new TextResponse($this->backendServiceService->getSqlTableQuerys());
     }
 
     public function createTableStructAction(ServerRequestInterface $request): ResponseInterface
@@ -55,16 +59,13 @@ class BackendServiceHandler implements RequestHandlerInterface
         return new JsonResponse($this->backendServiceService->createTableStruct());
     }
 
+    /**
+     * @RequestParams(username)
+     */
     public function createInitialContentAction(ServerRequestInterface $request): ResponseInterface
     {
         
         $params = $this->getParameter($request);
-
-        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'username');
-        if($check != null) {
-            return $check;
-        }
-
         return new JsonResponse($this->backendServiceService->createInitialContent($params['username']));
     }
 
@@ -78,37 +79,21 @@ class BackendServiceHandler implements RequestHandlerInterface
         return new JsonResponse($this->backendServiceService->deleteAllTables());
     }
     
+    /**
+     * @RequestParams(username | password | displayname)
+     */
     public function createUserAction(ServerRequestInterface $request): ResponseInterface
     {
         $params = $this->getParameter($request);
-
-        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'username');
-        if($check != null) {
-            return $check;
-        }
-
-        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'password');
-        if($check != null) {
-            return $check;
-        }
-
-        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'displayname');
-        if($check != null) {
-            return $check;
-        }
-        
         return new JsonResponse($this->backendServiceService->createUser($params['username'], $params['password'], $params['displayname']));
     }
 
+    /**
+     * @RequestParams(username)
+     */
     public function deleteUserAction(ServerRequestInterface $request): ResponseInterface
     {
         $params = $this->getParameter($request);
-
-        $check = $this->utilitiesService->checkWhetherParameterExistAndIsString($params, 'username');
-        if($check != null) {
-            return $check;
-        }
-
         return new JsonResponse($this->backendServiceService->deleteUser($params['username']));
     }
     
