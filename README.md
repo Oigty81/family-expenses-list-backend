@@ -94,6 +94,6 @@ The `.htaccess` file from the frontend-project rules all routes which starts wit
 ###
 
 ## Database model
-![alt text](/db-model.png)
+![](./docs/db-model.png)
 
 # 
