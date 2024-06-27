@@ -61,15 +61,15 @@ class CategoryDataService
                 $categoryCompositionsForMember = $this->db->query( $categoryCompositionsForMemberQuery, [$categoryCompositionsMember["id"]])->toArray();
                 
                 if(count($categoryCompositionsForMember) > 0) {
-                    $categories = [];
+                    $categoriesIntern = [];
 
                     foreach ( $categoryCompositionsForMember as $member) {
-                        array_push($categories, $member["category"]);
+                        array_push($categoriesIntern, $member["category"]);
                     }
 
                     $categoryComposition = [ 
                         "categoryCompositionId" => $categoryCompositionsMember["id"],
-                        "categories" => $categories
+                        "categories" => $categoriesIntern
                     ];
 
                     array_push($categoryCompositions, $categoryComposition);

@@ -111,15 +111,15 @@ class CategoryDataServiceTest extends TestCase
         $result = $categoryDataService->getCategories();
 
         $this->assertIsArray($result);
-        $this->assertEquals(true, array_key_exists("categoriesData", $result));
-        $this->assertEquals(true, array_key_exists("categoryCompositionsData", $result));
-        $this->assertEquals(2, count($result["categoriesData"]));
-        $this->assertEquals(2, count($result["categoryCompositionsData"]));
+        $this->assertEquals(true, array_key_exists("categories", $result));
+        $this->assertEquals(true, array_key_exists("categoryCompositions", $result));
+        $this->assertEquals(2, count($result["categories"]));
+        $this->assertEquals(2, count($result["categoryCompositions"]));
 
         $resultCat1 = false;
         $resultCat2 = false;
 
-        foreach($result["categoriesData"] as $cD) {
+        foreach($result["categories"] as $cD) {
             if(strcmp($cD["title"], "TestCategory1")) {
                 $resultCat1 = true;
             }
@@ -131,11 +131,11 @@ class CategoryDataServiceTest extends TestCase
         $this->assertEquals(true, $resultCat1);
         $this->assertEquals(true, $resultCat2);
 
-        $this->assertEquals(true, array_key_exists("categories", $result["categoryCompositionsData"][0]));
-        $this->assertEquals(true, array_key_exists("categories", $result["categoryCompositionsData"][1]));
+        $this->assertEquals(true, array_key_exists("categories", $result["categoryCompositions"][0]));
+        $this->assertEquals(true, array_key_exists("categories", $result["categoryCompositions"][1]));
 
-        $this->assertEquals(1, count($result["categoryCompositionsData"][0]["categories"]));
-        $this->assertEquals(2, count($result["categoryCompositionsData"][1]["categories"]));
+        $this->assertEquals(1, count($result["categoryCompositions"][0]["categories"]));
+        $this->assertEquals(2, count($result["categoryCompositions"][1]["categories"]));
 
     }
 
@@ -239,9 +239,9 @@ class CategoryDataServiceTest extends TestCase
 
         $categoryDataForValidation = $categoryDataService->getCategories();
 
-        $this->assertEquals(2, count($categoryDataForValidation["categoryCompositionsData"]));
-        $this->assertEquals(3, count($categoryDataForValidation["categoryCompositionsData"][0]["categories"]));
-        $this->assertEquals(2, count($categoryDataForValidation["categoryCompositionsData"][1]["categories"]));
+        $this->assertEquals(2, count($categoryDataForValidation["categoryCompositions"]));
+        $this->assertEquals(3, count($categoryDataForValidation["categoryCompositions"][0]["categories"]));
+        $this->assertEquals(2, count($categoryDataForValidation["categoryCompositions"][1]["categories"]));
         
         $this->assertEquals(1, 1);
     }
