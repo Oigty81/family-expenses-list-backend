@@ -139,13 +139,13 @@ class ExpensesDataService
         array_key_exists("price", $data) == true ? array_push($updateColumns, "price = '".$data["price"]."'") : null;
         
         $updateExpensesQuery = <<<SQLQUERY
-        UPDATE expenses SET {{columns}} WHERE id = ?;
+        UPDATE expenses SET userId = ?, {{columns}} WHERE id = ?;
         SQLQUERY;
 
         $fullQuery = str_replace("{{columns}}", implode(", ", $updateColumns), $updateExpensesQuery);
 
         try {
-            $this->db->query($fullQuery, [ $id ]);
+            $this->db->query($fullQuery, [ $userId, $id ]);
         return true;
         
         } catch (Exception $e) {
