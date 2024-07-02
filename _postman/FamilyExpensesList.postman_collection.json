@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d6674df7-43e3-4197-b265-25a92af878ed",
+		"_postman_id": "9894dd68-7155-4c85-b168-e6f59494eefe",
 		"name": "FamilyExpensesList",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -575,8 +575,17 @@
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryCompositionId\": 6,\r\n    \"price\": \"555,49\",\r\n    \"created\": \"2024-01-01: 18:06\",\r\n    \"metatext\": \"new Entry 1th\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/expenses/putExpenses?categoryCompositionId=10&price=10.56&metatext=new%20entry",
+							"raw": "{{baseUrl}}/v1/expenses/putExpenses",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -584,20 +593,6 @@
 								"v1",
 								"expenses",
 								"putExpenses"
-							],
-							"query": [
-								{
-									"key": "categoryCompositionId",
-									"value": "10"
-								},
-								{
-									"key": "price",
-									"value": "10.56"
-								},
-								{
-									"key": "metatext",
-									"value": "new%20entry"
-								}
 							]
 						}
 					},
@@ -618,8 +613,17 @@
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryCompositionId\": 6,\r\n    \"price\": \"54,99\",\r\n    \"created\": \"2024-04-10: 15:07\",\r\n    \"metatext\": \"new entry 2th\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/expenses/putExpenses?categoryCompositionId=10&price=10.55&metatext=new%20entry_2th",
+							"raw": "{{baseUrl}}/v1/expenses/putExpenses",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -627,20 +631,6 @@
 								"v1",
 								"expenses",
 								"putExpenses"
-							],
-							"query": [
-								{
-									"key": "categoryCompositionId",
-									"value": "10"
-								},
-								{
-									"key": "price",
-									"value": "10.55"
-								},
-								{
-									"key": "metatext",
-									"value": "new%20entry_2th"
-								}
 							]
 						}
 					},
