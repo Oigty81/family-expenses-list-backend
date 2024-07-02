@@ -102,7 +102,7 @@ class ExpensesDataService
 
             return [
                 "expenses" => $expenses,
-                "total" => $total,
+                "total" => round($total, 2),
             ];
         } catch (Exception $e) {
             return [
