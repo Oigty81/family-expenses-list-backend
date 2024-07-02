@@ -73,34 +73,34 @@ class ExpensesDataServiceTest extends TestCase
 
         $expensesDataService = new ExpensesDataService($this->config, $this->dataBaseAdapter, $this->loggerInterface->reveal(), $categoryDataService);
 
-        $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 10.33, "test spending 1");
-        $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositionsData"][1]["categoryCompositionId"], 20.99, "test spending 2");
-        $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 40, "test spending 3");
+        $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 10.33, "2023-08-10 20:00", "test spending 1");
+        $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositions"][1]["categoryCompositionId"], 20.99, "2023-08-10 20:12", "test spending 2");
+        $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 40, "2023-08-10 20:22", "test spending 3");
        
         $this->dataBaseAdapter->query(
-            "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ? , ?, ?);",
-            [$userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 99.95, "2023-09-10 20:00", "test spending 1" ]
+            "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, ?, ?);",
+            [$userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 99.95, "2023-09-10 20:00", "test spending 1" ]
         );
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ? , ?, ?);",
-            [$userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 69.95, "2023-09-10 20:15", "test spending 2" ]
+            "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, ?, ?);",
+            [$userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 69.95, "2023-09-10 20:15", "test spending 2" ]
         );
 
         $this->dataBaseAdapter->query(
-            "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ? , ?, ?);",
-            [$userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 149.95, "2023-09-13 20:15", "test spending 3 special text" ]
+            "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, ?, ?);",
+            [$userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 149.95, "2023-09-13 20:15", "test spending 3 special text" ]
         );
 
         $expensesSelection1 = $expensesDataService->GetExpenses([]);
         
         $this->assertEquals(6,count($expensesSelection1["expenses"]));
-        $this->assertEquals(99.95,$expensesSelection1["expenses"][0]["price"]);
-        $this->assertEquals("2023-09-10 20:00:00", $expensesSelection1["expenses"][0]["created"]);
-        $this->assertEquals(69.95,$expensesSelection1["expenses"][1]["price"]);
-        $this->assertEquals("2023-09-10 20:15:00", $expensesSelection1["expenses"][1]["created"]);
-        $this->assertEquals(149.95,$expensesSelection1["expenses"][2]["price"]);
-        $this->assertEquals("2023-09-13 20:15:00", $expensesSelection1["expenses"][2]["created"]);
+        $this->assertEquals(99.95,$expensesSelection1["expenses"][3]["price"]);
+        $this->assertEquals("2023-09-10 20:00:00", $expensesSelection1["expenses"][3]["created"]);
+        $this->assertEquals(69.95,$expensesSelection1["expenses"][4]["price"]);
+        $this->assertEquals("2023-09-10 20:15:00", $expensesSelection1["expenses"][4]["created"]);
+        $this->assertEquals(149.95,$expensesSelection1["expenses"][5]["price"]);
+        $this->assertEquals("2023-09-13 20:15:00", $expensesSelection1["expenses"][5]["created"]);
         $this->assertEquals(391.17, $expensesSelection1["total"]);
 
         $expensesSelection2 = $expensesDataService->GetExpenses([
@@ -151,11 +151,11 @@ class ExpensesDataServiceTest extends TestCase
 
         $expensesDataService = new ExpensesDataService($this->config, $this->dataBaseAdapter, $this->loggerInterface->reveal(), $categoryDataService);
 
-        $result = $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 10.33, "test expenses 1");
+        $result = $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 10.33, "2023-08-10 20:00", "test expenses 1");
         $this->assertEquals(true, $result);
-        $result = $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositionsData"][1]["categoryCompositionId"], 20.99, "test expenses 2");
+        $result = $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositions"][1]["categoryCompositionId"], 20.99, "2023-08-10 20:12", "test expenses 2");
         $this->assertEquals(true, $result);
-        $result = $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 40, "test expenses 3");
+        $result = $expensesDataService->insertExpenses($userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 40, "2023-08-10 20:22", "test expenses 3");
         $this->assertEquals(true, $result);
 
         $expenses = $this->dataBaseAdapter->query(
@@ -202,12 +202,12 @@ class ExpensesDataServiceTest extends TestCase
 
         $this->dataBaseAdapter->query(
             "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, now(), ?)",
-            [$userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 10.33, "test expenses 1"]
+            [$userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 10.33, "test expenses 1"]
         );
 
         $this->dataBaseAdapter->query(
             "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, now(), ?)",
-            [$userId, $categoryData["categoryCompositionsData"][1]["categoryCompositionId"], 20.99, "test expenses 2"]
+            [$userId, $categoryData["categoryCompositions"][1]["categoryCompositionId"], 20.99, "test expenses 2"]
         );
 
         $expensesBefore = $this->dataBaseAdapter->query(
@@ -280,17 +280,17 @@ class ExpensesDataServiceTest extends TestCase
 
         $this->dataBaseAdapter->query(
             "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, now(), ?)",
-            [$userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 10.33, "test expenses 1"]
+            [$userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 10.33, "test expenses 1"]
         );
 
         $this->dataBaseAdapter->query(
             "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, now(), ?)",
-            [$userId, $categoryData["categoryCompositionsData"][1]["categoryCompositionId"], 20.99, "test expenses 2"]
+            [$userId, $categoryData["categoryCompositions"][1]["categoryCompositionId"], 20.99, "test expenses 2"]
         );
 
         $this->dataBaseAdapter->query(
             "INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ?, now(), ?)",
-            [$userId, $categoryData["categoryCompositionsData"][0]["categoryCompositionId"], 40, "test expenses 3"]
+            [$userId, $categoryData["categoryCompositions"][0]["categoryCompositionId"], 40, "test expenses 3"]
         );
 
 

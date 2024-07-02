@@ -62,7 +62,7 @@ class ExpensesDataHandlerTest extends TestCase
 
     public function testThatHandlerMethodPutExpensesActionCallsItsServiceMethodsCorrectly(): void
     {        
-        $this->expensesDataService->insertExpenses(Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
+        $this->expensesDataService->insertExpenses(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(["TestCall" => 1])->shouldBeCalledTimes(1);
 
         $expensesDataHandler = new ExpensesDataHandler(
             $this->config,
@@ -70,7 +70,7 @@ class ExpensesDataHandlerTest extends TestCase
             $this->expensesDataService->reveal(),
         );
 
-        $this->serverRequest->getQueryParams()->willReturn(["categoryCompositionId" => 1, "price" => 2, "metatext" => "meta..."]);
+        $this->serverRequest->getQueryParams()->willReturn(["categoryCompositionId" => 1, "price" => 2, "created" => "2020-02-02", "metatext" => "meta..."]);
         $this->serverRequest->getParsedBody()->willReturn([]);
         $this->serverRequest->getAttribute("userId")->willReturn(1);
 
