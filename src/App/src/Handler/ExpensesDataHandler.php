@@ -50,14 +50,14 @@ class ExpensesDataHandler implements RequestHandlerInterface
     }
     
     /**
-     * @RequestParams(categoryCompositionId | price | metatext)
+     * @RequestParams(categoryCompositionId | price | created | metatext)
      */
     public function putExpensesAction(ServerRequestInterface $request): ResponseInterface
     {
         $userId = $request->getAttribute("userId");
         $params = $this->getParameter($request);
            
-        $serviceResult = $this->expensesDataService->insertExpenses($userId, $params['categoryCompositionId'], $params['price'], $params['metatext']);
+        $serviceResult = $this->expensesDataService->insertExpenses($userId, $params['categoryCompositionId'], $params['price'], $params['created'], $params['metatext']);
         $error = $this->checkServiceErrorForResponse($serviceResult);
         return $error == null ? new JsonResponse($serviceResult) : $error;
     }

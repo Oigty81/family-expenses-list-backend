@@ -112,14 +112,14 @@ class ExpensesDataService
         }    
     }
 
-    public function insertExpenses($userId, $categoryCompositionId, $price, $metatext) 
+    public function insertExpenses($userId, $categoryCompositionId, $price, $created, $metatext) 
     {
         $insertExpensesQuery = <<<SQLQUERY
-        INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ? , now(), ?);
+        INSERT INTO expenses (userId, categoryCompositionId, price, created, metatext) VALUES(?, ?, ? , ?, ?);
         SQLQUERY;
 
         try {
-            $this->db->query($insertExpensesQuery, [$userId, $categoryCompositionId, $price, $metatext]);
+            $this->db->query($insertExpensesQuery, [$userId, $categoryCompositionId, $price, $created, $metatext]);
             return true;
         } catch (Exception $e) {
             return [
