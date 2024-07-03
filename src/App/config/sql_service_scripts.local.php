@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS expenses (
     userId INT UNSIGNED NOT NULL,
     categoryCompositionId INT UNSIGNED NOT NULL,
     price FLOAT NOT NULL,
-    created TIMESTAMP NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     metatext VARCHAR(255) NOT NULL,
     CONSTRAINT fk_expenses__users FOREIGN KEY(userId) REFERENCES users(id),
     CONSTRAINT fk_expenses__category_compositions FOREIGN KEY(categoryCompositionId) REFERENCES category_compositions(Id)

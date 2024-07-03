@@ -49,7 +49,7 @@ class BackendServiceHandler implements RequestHandlerInterface
         die();
     }
 
-    public function getSqlTableQueryAction(ServerRequestInterface $request): ResponseInterface
+    public function getSqlTableQuerysAction(ServerRequestInterface $request): ResponseInterface
     {
         return new TextResponse($this->backendServiceService->getSqlTableQuerys());
     }
